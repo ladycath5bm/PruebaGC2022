@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Gce_caractersiticas extends Model
+class Gce_caracteristicas extends Model
 {
     use HasFactory;
 
@@ -27,14 +27,14 @@ class Gce_caractersiticas extends Model
         'gce_ram',
     ];
 
-    public function scopeGet()
+    public function get()
     {
-        return Gce_caractersiticas::paginate(20);
+        return Gce_caracteristicas::paginate(20);
     }
 
-    public function scopeGetOne(int $gce_id): Gce_caractersiticas
+    public function showOne(int $gce_id): Gce_caracteristicas
     {
-        return Gce_caractersiticas::findOrFail($gce_id);
+        return Gce_caracteristicas::findOrFail($gce_id);
     }
 
 }

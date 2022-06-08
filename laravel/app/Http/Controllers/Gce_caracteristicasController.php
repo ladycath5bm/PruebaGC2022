@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Gce_caractersiticas;
 use App\Actions\AddOneCharacteristic;
+use App\Models\Gce_caracteristicas;
 
 class Gce_caracteristicasController extends Controller
 {
@@ -12,7 +12,7 @@ class Gce_caracteristicasController extends Controller
 
     public function __construct()
     {
-        $this->model = new Gce_caractersiticas();
+        $this->model = new Gce_caracteristicas();
     }
 
     public function getAll(): void
@@ -27,9 +27,9 @@ class Gce_caracteristicasController extends Controller
         echo json_encode($response);
     }
 
-    public function getOne(int $gce_id)
+    public function getOne(Gce_caracteristicas $gce_characteristic)
     {
-        $characteristic = $this->model->getOne($gce_id);
+        $characteristic = $this->model->showOne($gce_characteristic->gce_id);
         echo json_encode($characteristic);
     }
 
