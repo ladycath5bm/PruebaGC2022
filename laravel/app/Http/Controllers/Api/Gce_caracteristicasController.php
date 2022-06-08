@@ -2,63 +2,34 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Actions\AddOneCharacteristic;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Gce_caracteristicasCollection;
+use App\Http\Resources\Gce_caracteristicasResource;
+use App\Models\Gce_caracteristicas;
 use Illuminate\Http\Request;
 
 class Gce_caracteristicasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function getAll(): Gce_caracteristicasCollection
     {
-        //
+        $caracteristicas = Gce_caracteristicas::all();
+
+        return Gce_caracteristicasCollection::make($caracteristicas)
+            ->additional(['mensaje' => 'Completado']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function addOne(Request $request)
     {
-        //
+        $addOneCharacteristic = (new AddOneCharacteristic())->create($request->toArray());
+
+        return Gce_caracteristicasResource::make($addOneCharacteristic)
+            ->additional(['mensaje' => 'Completado']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function getOne(Gce_caracteristicas $gce_caracteristicas)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return Gce_caracteristicasResource::make($gce_caracteristicas)
+            ->additional(['mensaje' => 'completado']);
     }
 }
